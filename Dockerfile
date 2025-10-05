@@ -1,4 +1,6 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:8.1.3
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/amd64:17.0.0
+#ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base/amd64:8.1.3
+
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -9,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG BUILD_ARCH=amd64
 
 # update python version
-RUN apt -y install python3.13 python3.13-venv
+#RUN apt -y install python3.13 python3.13-venv
 
 # Install requirements for add-on
 RUN \
