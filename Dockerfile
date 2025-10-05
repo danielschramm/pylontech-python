@@ -8,6 +8,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Setup base system
 ARG BUILD_ARCH=amd64
 
+# update python version
+RUN apt -y install python3.13 python3.13-venv
+
 # Install requirements for add-on
 RUN \
   apk add --no-cache \
