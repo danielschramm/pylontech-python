@@ -94,6 +94,8 @@ class PylontechStack:
 
         totalCapacity = 0
         remainCapacity = 0
+        chargeVoltage = 0
+        currentVoltage = 0
         power = 0
         for batt in range(0, self.battcount):
             try:
@@ -105,6 +107,8 @@ class PylontechStack:
                 analoglList.append(decoded)
                 remainCapacity = remainCapacity + decoded['RemainCapacity']
                 totalCapacity = totalCapacity + decoded['ModuleTotalCapacity']
+                chargeVoltage = 53.0 #TODO use charge voltage from captured data
+                currentVoltage = decoded['Voltage']
                 power = power + (decoded['Voltage'] * decoded['Current'])
 
                 self.pylon.send(self.encode.getChargeDischargeManagement(battNumber=batt, group=self.group))
@@ -144,6 +148,8 @@ class PylontechStack:
 
         self.pylonData['Calculated']['TotalCapacity_Ah'] = totalCapacity
         self.pylonData['Calculated']['RemainCapacity_Ah'] = remainCapacity
+        self.pylonData['Calculated']['TotalEnergy'] = (totalCapacity * chargeVoltage) / 1000.0
+        self.pylonData['Calculated']['RemainEnergy'] = (remainCapacity * currentVoltage) / 1000.0
         self.pylonData['Calculated']['Remain_Percent'] = round((remainCapacity / totalCapacity) * 100, 0)
 
         self.pylonData['Calculated']['Power_W'] = round(power, 3)
