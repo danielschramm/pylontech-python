@@ -240,6 +240,38 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
             initial_result=data
         )
         return_list.append(sensor)
+        sensor_name = 'Pylontech_PackNr_' + str(pack_count), '_RemainEnergy'
+        sensor = PylontechPackSensor(
+            hass=None, coordinator=None,
+            name=str(sensor_name),
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement='kWh',
+            device_class='energy',
+            icon="mdi:battery",
+            key_main='AnalogList',
+            key_sub='RemainEnergy',
+            key_sub_nr=None,
+            key_pack_nr=pack_count,
+            entry_id=sensor_name,
+            initial_result=data
+        )
+        return_list.append(sensor)
+        sensor_name = 'Pylontech_PackNr_' + str(pack_count), '_ModuleTotalEnergy'
+        sensor = PylontechPackSensor(
+            hass=None, coordinator=None,
+            name=str(sensor_name),
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement='kWh',
+            device_class='energy',
+            icon="mdi:battery",
+            key_main='AnalogList',
+            key_sub='ModuleTotalEnergy',
+            key_sub_nr=None,
+            key_pack_nr=pack_count,
+            entry_id=sensor_name,
+            initial_result=data
+        )
+        return_list.append(sensor)
         sensor_name = 'Pylontech_PackNr_' + str(pack_count), '_CycleNumber'
         sensor = PylontechPackSensor(
             hass=None, coordinator=None,

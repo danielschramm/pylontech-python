@@ -3,6 +3,7 @@ import argparse
 import os
 import sys
 import time
+from pprint import pprint
 
 from ha_mqtt_discoverable import Settings
 

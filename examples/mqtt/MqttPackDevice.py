@@ -19,19 +19,33 @@ class MqttPackDevice:
         packSensors['RemainCapacity'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
                      entity=SensorInfo(name=name_base + "RemainCapacity", unit_of_measurement="Ah",
-                                       device_class="energy_storage", unique_id=unique_id_base + "_RemainCapacity",
+                                       device_class=None, unique_id=unique_id_base + "_RemainCapacity",
                                        device=self.device_info))
         )
         packSensors['ModuleTotalCapacity'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
                      entity=SensorInfo(name=name_base + "ModuleTotalCapacity", unit_of_measurement="Ah",
-                                       device_class="energy_storage", unique_id=unique_id_base + "_ModuleTotalCapacity",
+                                       device_class=None, unique_id=unique_id_base + "_ModuleTotalCapacity",
                                        device=self.device_info))
         )
 
+        packSensors['RemainEnergy'] = Sensor(
+            Settings(mqtt=self.mqtt_settings,
+                     entity=SensorInfo(name=name_base + "RemainEnergy", unit_of_measurement="kWh",
+                                       device_class="energy_storage", unique_id=unique_id_base + "_RemainEnergy",
+                                       device=self.device_info))
+        )
+        packSensors['ModuleEnergy'] = Sensor(
+            Settings(mqtt=self.mqtt_settings,
+                     entity=SensorInfo(name=name_base + "ModuleTotalEnergy", unit_of_measurement="kWh",
+                                       device_class="energy_storage", unique_id=unique_id_base + "_ModuleTotalEnergy",
+                                       device=self.device_info))
+        )
+
+
         packSensors['CycleNumber'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "CycleNumber", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "CycleNumber", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_CycleNumber", device=self.device_info))
         )
 
@@ -74,63 +88,63 @@ class MqttPackDevice:
 
         packSensors['ChargeCurentAlarm'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "ChargeCurentAlarm", unit_of_measurement="",
-                                       device_class="None", unique_id=unique_id_base + "_ChargeCurentAlarm",
+                     entity=SensorInfo(name=name_base + "ChargeCurentAlarm", unit_of_measurement=None,
+                                       device_class=None, unique_id=unique_id_base + "_ChargeCurentAlarm",
                                        device=self.device_info))
         )
         packSensors['DischargeCurrentAlarm'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "DischargeCurrentAlarm", unit_of_measurement="",
-                                       device_class="None", unique_id=unique_id_base + "_DischargeCurrentAlarm",
+                     entity=SensorInfo(name=name_base + "DischargeCurrentAlarm", unit_of_measurement=None,
+                                       device_class=None, unique_id=unique_id_base + "_DischargeCurrentAlarm",
                                        device=self.device_info))
         )
 
         packSensors['InfoFlag'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "InfoFlag", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "InfoFlag", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_InfoFlag", device=self.device_info))
         )
 
         packSensors['ModuleVoltageAlarm'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "ModuleVoltageAlarm", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "ModuleVoltageAlarm", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_ModuleVoltageAlarm", device=self.device_info))
         )
 
         packSensors['Status1'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Status1", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Status1", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_Status1", device=self.device_info))
         )
 
         packSensors['Status2'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Status2", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Status2", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_Status2", device=self.device_info))
         )
 
         packSensors['Status3'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Status3", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Status3", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_Status3", device=self.device_info))
         )
 
         packSensors['Status4'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Status4", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Status4", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_Status4", device=self.device_info))
         )
 
         packSensors['Status5'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Status5", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Status5", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_Status5", device=self.device_info))
         )
 
         for cell in range(cell_count):
             packSensors['CellAlarm_' + str(cell)] = Sensor(
                 Settings(mqtt=self.mqtt_settings,
-                         entity=SensorInfo(name=name_base + "CellAlarm_" + str(cell), unit_of_measurement="", device_class="None",
+                         entity=SensorInfo(name=name_base + "CellAlarm_" + str(cell), unit_of_measurement=None, device_class=None,
                                            unique_id=unique_id_base + "_CellAlarm_" + str(cell),
                                            device=self.device_info))
             )
@@ -138,8 +152,8 @@ class MqttPackDevice:
         for ts in range(temperature_count):
             packSensors['TemperatureAlarm_' + str(ts)] = Sensor(
                 Settings(mqtt=self.mqtt_settings,
-                         entity=SensorInfo(name=name_base + "TemperatureAlarm_" + str(ts), unit_of_measurement="",
-                                           device_class="None",
+                         entity=SensorInfo(name=name_base + "TemperatureAlarm_" + str(ts), unit_of_measurement=None,
+                                           device_class=None,
                                            unique_id=unique_id_base + "_TemperatureAlarm_" + str(ts),
                                            device=self.device_info))
             )
@@ -178,31 +192,31 @@ class MqttPackDevice:
 
         packSensors['StatusChargeEnable'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "StatusChargeEnable", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "StatusChargeEnable", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_StatusChargeEnable", device=self.device_info))
         )
 
         packSensors['StatusChargeImmediately1'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "StatusChargeImmediately1", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "StatusChargeImmediately1", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_StatusChargeImmediately1", device=self.device_info))
         )
 
         packSensors['StatusChargeImmediately2'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "StatusChargeImmediately2", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "StatusChargeImmediately2", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_StatusChargeImmediately2", device=self.device_info))
         )
 
         packSensors['StatusDischargeEnable'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "StatusDischargeEnable", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "StatusDischargeEnable", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_StatusDischargeEnable", device=self.device_info))
         )
 
         packSensors['StatusFullChargeRequired'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "StatusFullChargeRequired", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "StatusFullChargeRequired", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_StatusFullChargeRequired", device=self.device_info))
         )
 
@@ -220,12 +234,12 @@ class MqttPackDevice:
         self.haSensors = {}
         self.haSensors['number'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Number in Stack", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Number in Stack", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_Nr", device=self.device_info))
         )
         self.haSensors['serial_number'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
-                     entity=SensorInfo(name=name_base + "Serial Number", unit_of_measurement="", device_class="None",
+                     entity=SensorInfo(name=name_base + "Serial Number", unit_of_measurement=None, device_class=None,
                                        unique_id=unique_id_base + "_SN", device=self.device_info))
         )
         self.haSensors['AnalogList'] = self._create_analog_sensors(serial_number, number, cell_count, temperature_count)

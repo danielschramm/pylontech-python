@@ -35,15 +35,29 @@ class MqttStackDevice:
         calcSensors['RemainCapacity_Ah'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
                      entity=SensorInfo(name=name_base + "RemainCapacity", unit_of_measurement="Ah",
-                                       device_class="energy_storage", unique_id="Pylon_RemainCapacity_1",
+                                       device_class=None, unique_id="Pylon_RemainCapacity_1",
                                        device=self.device_info))
         )
         calcSensors['TotalCapacity_Ah'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
                      entity=SensorInfo(name=name_base + "TotalCapacity", unit_of_measurement="Ah",
-                                       device_class="energy_storage", unique_id="Pylon_TotalCapacity_1",
+                                       device_class=None, unique_id="Pylon_TotalCapacity_1",
                                        device=self.device_info))
         )
+
+        calcSensors['RemainEnergy'] = Sensor(
+            Settings(mqtt=self.mqtt_settings,
+                     entity=SensorInfo(name=name_base + "RemainEnergy", unit_of_measurement="kWh",
+                                       device_class="energy_storage", unique_id="Pylon_RemainEnergy_1",
+                                       device=self.device_info))
+        )
+        calcSensors['TotalEnergy'] = Sensor(
+            Settings(mqtt=self.mqtt_settings,
+                     entity=SensorInfo(name=name_base + "TotalEnergy", unit_of_measurement="kWh",
+                                       device_class="energy_storage", unique_id="Pylon_TotalEnergy_1",
+                                       device=self.device_info))
+        )
+
 
         calcSensors['Remain_Percent'] = Sensor(
             Settings(mqtt=self.mqtt_settings,
