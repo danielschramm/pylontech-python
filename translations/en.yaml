@@ -3,26 +3,28 @@ configuration:
   pylon:
     name: Pylontech Serial Port
     description: >-
-      Pylontech battery stack RS485 port. It can be a real serial port or a 
-      network connection to a network serial adapter.
+      RS-485 Serial port connected to the RS-485 port of a Pylontech battery stack's master battery.
+      It can be a real serial port or a network connection to a network serial adapter.
       Examples: "/dev/ttyUSB0", "socket://10.10.4.13:23", "rfc2217://10.10.4.13:23"
+      Note: See the batteries manual for the pinout.
   baud:
     name: Pylontech Serial Baudrate
     description: >-
-      Serial port baudrate 9600 or 115200.
+      RS-485 baud rate; 9600 or 115200 baud.
       Ignored in case of socket connection.
+      Note: The baud rate can be configured on the Pylontech Battery DIL switches.
   packs:
     name: Pylontech Number Of Packs In Stack
     description: >-
-      Number of battery packs in the stack.
+      Number of battery units in the stack.
   mqtt_ip:
     name: MQTT Address
     description: >-
-      IP or Hostname of the MQTT serverr.
+      IP or hostname of the MQTT server.
   mqtt_port:
     name: MQTT port
     description: >-
-      MQTT network port.
+      MQTT network port, e.g. 1883 for unencrypted connections.
   username:
     name: MQTT Username
     description: >-
