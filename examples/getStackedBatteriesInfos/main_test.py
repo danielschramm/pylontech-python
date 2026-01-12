@@ -3,19 +3,19 @@ import datetime
 from enum import auto
 
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
-from samba.dcerpc.initshutdown import initshutdown
+#from samba.dcerpc.initshutdown import initshutdown
 from strenum import StrEnum
 
 from dataclasses import dataclass
 from typing import List
 from typing import Any, Optional, Union
-from pylontech_stack import PylontechStack
+from pylontech import PylontechStack
 
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-DOMAIN = "pylontech_us"
+DOMAIN = "pylontech_us"  # refers to Pylontech USxxxx batteries
 
 
 class PylontechCoordinator:
@@ -136,7 +136,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
         )
         pack_count = pack_count + 1
     pack_count = 1
-    for d in data['AnaloglList']:
+    for d in data['AnalogList']:
         print(d)
         element_count=1
         for v in d['CellVoltages']:
@@ -148,7 +148,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
                 native_unit_of_measurement='V',
                 device_class= SensorDeviceClass.VOLTAGE,
                 icon="mdi:lightning-bolt",
-                key_main='AnaloglList',
+                key_main='AnalogList',
                 key_sub='CellVoltages',
                 key_sub_nr=element_count,
                 key_pack_nr=pack_count,
@@ -167,7 +167,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
                 native_unit_of_measurement='?C',
                 device_class=SensorDeviceClass.TEMPERATURE,
                 icon="mdi:thermometer",
-                key_main='AnaloglList',
+                key_main='AnalogList',
                 key_sub='Temperatures',
                 key_sub_nr=element_count,
                 key_pack_nr=pack_count,
@@ -184,7 +184,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
             native_unit_of_measurement='A',
             device_class=SensorDeviceClass.CURRENT,
             icon="mdi:current-dc",
-            key_main='AnaloglList',
+            key_main='AnalogList',
             key_sub='Current',
             key_sub_nr=None,
             key_pack_nr=pack_count,
@@ -200,7 +200,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
             native_unit_of_measurement='V',
             device_class=SensorDeviceClass.VOLTAGE,
             icon="mdi:lightning-bolt",
-            key_main='AnaloglList',
+            key_main='AnalogList',
             key_sub='Voltage',
             key_sub_nr=None,
             key_pack_nr=pack_count,
@@ -216,7 +216,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
             native_unit_of_measurement='Ah',
             device_class='capacity',
             icon="mdi:battery",
-            key_main='AnaloglList',
+            key_main='AnalogList',
             key_sub='RemainCapacity',
             key_sub_nr=None,
             key_pack_nr=pack_count,
@@ -232,8 +232,40 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
             native_unit_of_measurement='Ah',
             device_class='capacity',
             icon="mdi:battery",
-            key_main='AnaloglList',
+            key_main='AnalogList',
             key_sub='ModuleTotalCapacity',
+            key_sub_nr=None,
+            key_pack_nr=pack_count,
+            entry_id=sensor_name,
+            initial_result=data
+        )
+        return_list.append(sensor)
+        sensor_name = 'Pylontech_PackNr_' + str(pack_count), '_RemainEnergy'
+        sensor = PylontechPackSensor(
+            hass=None, coordinator=None,
+            name=str(sensor_name),
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement='kWh',
+            device_class='energy',
+            icon="mdi:battery",
+            key_main='AnalogList',
+            key_sub='RemainEnergy',
+            key_sub_nr=None,
+            key_pack_nr=pack_count,
+            entry_id=sensor_name,
+            initial_result=data
+        )
+        return_list.append(sensor)
+        sensor_name = 'Pylontech_PackNr_' + str(pack_count), '_ModuleTotalEnergy'
+        sensor = PylontechPackSensor(
+            hass=None, coordinator=None,
+            name=str(sensor_name),
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement='kWh',
+            device_class='energy',
+            icon="mdi:battery",
+            key_main='AnalogList',
+            key_sub='ModuleTotalEnergy',
             key_sub_nr=None,
             key_pack_nr=pack_count,
             entry_id=sensor_name,
@@ -248,7 +280,7 @@ def pylon_to_sensors(data: PylontechStack, hass=None) -> List[SensorEntity]:
             native_unit_of_measurement=None,
             device_class='capacity',
             icon="mdi:battery",
-            key_main='AnaloglList',
+            key_main='AnalogList',
             key_sub='CycleNumber',
             key_sub_nr=None,
             key_pack_nr=pack_count,
@@ -273,7 +305,7 @@ try:
 
     # print(x.pylonData['Calculated'])
     # print(x.pylonData['SerialNumbers'])
-    # print(x.pylonData['AnaloglList'])
+    # print(x.pylonData['AnalogList'])
     # print(x.pylonData['ChargeDischargeManagementList'])
     # print(x.pylonData['AlarmInfoList'])
 

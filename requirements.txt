@@ -1,1 +1,7 @@
-pyserial>=3.5
+pyserial~=3.5
+paho-mqtt~=2.1.0
+homeassistant~=2025.9.4
+setuptools~=68.2.0
+StrEnum~=0.4.15
+pydantic~=2.11.9
+ha-mqtt-discoverable~=0.21.0
