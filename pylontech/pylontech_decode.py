@@ -218,7 +218,7 @@ class PylontechDecode:
                 self.data['ModuleTotalCapacity'] = self.capacity(payload[i:i + 6])
                 i = i + 6
             self.data['RemainEnergy'] = self.data['RemainCapacity'] * self.data['Voltage'] / 1000.0
-            self.data['ModuleTotalEnergy'] = self.data['ModuleTotalCapacity'] * 53.0 / 1000.0 #TODO: use charge voltage form system parameters
+            self.data['ModuleTotalEnergy'] = self.data['ModuleTotalCapacity'] * 53.0 / 1000.0  #TODO: use charge voltage from system parameters
         else:
             print('wrong decoder selected')
         return self.data
