@@ -1,5 +1,5 @@
 name: "Pylontech MQTT"
-description: "My first real add-on!"
+description: "Serves Info from Pylontech USxxxx batteries - connected using a RS-485 adapter."
 version: "1.0.2"
 slug: "pylontech_mqtt"
 init: false
