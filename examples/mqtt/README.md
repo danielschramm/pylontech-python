@@ -7,6 +7,12 @@ This seems to be a limitation of ha-mqtt-discoverable and
 might need rework after this is merged:
 https://github.com/unixorn/ha-mqtt-discoverable/pull/75
 
+    PylontechMqtt.py --user <mqtt user>
+                     --pass <mqtt password>
+                     --mqtt <mqtt server name or IP>
+                     --pylon <serial device: name or socket>
+                     --packs <number of battery units>
+
 Run example:
 
-./PylontechMqtt.py --user myUser --pass myPass --mqtt 10.1.1.2 --pylon socket://10.1.1.1:23 --packs 8
+     ./PylontechMqtt.py --user myUser --pass myPass --mqtt 10.1.1.2 --pylon socket://10.1.1.1:23 --packs 8
