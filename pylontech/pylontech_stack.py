@@ -88,7 +88,7 @@ class PylontechStack:
         """
         starttime = time.time()
         print("start update")
-        analoglList = []
+        analogList = []
         chargeDischargeManagementList = []
         alarmInfoList = []
 
@@ -104,7 +104,7 @@ class PylontechStack:
                 raws = self.pylon.receive()
                 self.decode.decode_header(raws[0])
                 decoded = self.decode.decodeAnalogValue()
-                analoglList.append(decoded)
+                analogList.append(decoded)
                 remainCapacity = remainCapacity + decoded['RemainCapacity']
                 totalCapacity = totalCapacity + decoded['ModuleTotalCapacity']
                 chargeVoltage = 53.0 #TODO use charge voltage from captured data
@@ -129,7 +129,7 @@ class PylontechStack:
                 self.pylon.reconnect()
                 raise Exception('Pylontech update error') from e
 
-        self.pylonData['AnalogList'] = analoglList
+        self.pylonData['AnalogList'] = analogList
         self.pylonData['ChargeDischargeManagementList'] = chargeDischargeManagementList
         self.pylonData['AlarmInfoList'] = alarmInfoList
 
