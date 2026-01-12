@@ -15,7 +15,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-DOMAIN = "pylontech_us"
+DOMAIN = "pylontech_us"  # refers to Pylontech USxxxx batteries
 
 
 class PylontechCoordinator:
